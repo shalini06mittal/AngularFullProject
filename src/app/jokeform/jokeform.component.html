@@ -1,0 +1,45 @@
+<div class="card card-block">
+  <h4 class="card-title">Create Joke</h4>	
+  <form #jokeform="ngForm"
+  (ngSubmit)="onsubmit(jokeform)">
+  <div class="form-group">
+    <input type="text"
+           class="form-control"
+           [class.is-invalid]="setup.invalid && setup.touched"
+           placeholder="Enter the setup" required
+           pattern="^[a-zA-Z\s]+$"
+           [(ngModel)]="joke.setup" name="setup" #setup="ngModel">	
+       <div *ngIf="setup.touched">
+          <div *ngIf="setup.errors && (setup.invalid)">
+          <small class="text-danger" *ngIf="setup.errors.required">
+          SetUp required </small>
+          <small class="text-danger" *ngIf="setup.errors.pattern">
+          it can contain only alphabets and space</small>
+          </div>
+          </div>
+  </div>
+  <div class="form-group">    
+    <input type="text" class="form-control"
+    [(ngModel)]="joke.line" name="line"  
+    placeholder="Enter the punchline">	
+    </div>
+    <div class="form-group">    
+       <select (blur)="validate(cat.value)"
+       (change)="validate(cat.value)"
+       [(ngModel)]="joke.category"  name="category"
+       required #cat="ngModel" required
+       [class.is-invalid]="cat.invalid && cat.touched && hasError">
+         <option value="">Select a Category</option>
+         <option *ngFor="let category of categories"
+          [value]="category">{{category}}</option>
+       </select>
+       <small class="text-danger" 
+       [class.d-none]="cat.untouched || !hasError">
+       Please choose a Category</small>
+        </div>  
+  <button type="submit"
+          class="btn btn-primary"
+          [disabled]="jokeform.invalid || hasError"
+          >Create</button>
+        </form>
+  </div>

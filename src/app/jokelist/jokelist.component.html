@@ -1,0 +1,48 @@
+<div *ngIf="jokes?.length && !editing">
+  <div class="container">
+  <h3>Jokes to have some fun : </h3>
+    <div class="row">
+      <div *ngFor="let j of jokes" class="col-md-4" >
+          <app-joke [joke]="j">  
+              <button (click)="delete(j)">Delete</button>
+              <div style='margin-bottom: 10px;'></div>
+              <button (click)="edit(j)">Edit</button>
+              
+          </app-joke>    
+      </div>  
+    </div>
+  </div>
+  </div>
+  <h3 class="empty" *ngIf="!jokes?.length">
+  No jokes to display...
+  </h3>
+  <div class="container" *ngIf="editing">
+      <div class="card card-block">
+        <h4>Edit  joke</h4>
+          <form 
+          (ngSubmit)="onsubmit()">
+          <div class="form-group">
+            SetUp
+            <input type="text"
+                   class="form-control"
+                   ngModel name="setup" [(ngModel)]="joke.setup">	    
+          </div>
+          <div class="form-group">    
+           PunchLine
+            <input type="text" class="form-control"
+            ngModel name="line" [(ngModel)]="joke.line">	
+            </div>
+            <div class="form-group">    
+                Category <input type="text"
+                class="form-control"
+                ngModel name="category" [(ngModel)]="joke.category">	
+                </div>
+            
+          <button type="submit"
+                  class="btn btn-primary"
+                  >Update</button>
+                </form>
+          </div>
+        
+        </div>   
+  

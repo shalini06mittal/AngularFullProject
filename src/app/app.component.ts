@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { JokeHttpService } from './service/joke.http.service';
+import { Joke } from './model/joke';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'sampleproject';
+  joke:Joke;
 }

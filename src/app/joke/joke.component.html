@@ -1,0 +1,12 @@
+<div class = "card">
+  <p>{{joke?.setup}}</p>
+  <p class='card-text' [hidden]="joke?.hide">{{joke?.line}}</p>
+  
+  <button (click)="toggle()" class='btn-green'>
+      Toggle PunchLine
+    </button>
+    <div style='margin-bottom: 10px;'></div>
+    <ng-content></ng-content>
+    <div style='margin-bottom: 10px;'></div>
+  </div>
+    
