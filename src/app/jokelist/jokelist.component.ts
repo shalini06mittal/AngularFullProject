@@ -17,15 +17,16 @@ export class JokelistComponent implements OnInit {
    }
   ngOnInit() {
     this.getJokes();
-    console.log('list init');
-    console.log(this.jokes);
   }
   getJokes()
   {
-    this.service.getJokes().subscribe((resp)=>{
-      console.log("response jokeslist");
-      console.log(resp);
-      this.jokes = resp;
+    this.service.getJokes().subscribe((resp:Joke[])=>{
+      
+      for(let j of resp){
+        console.log(j.setup);
+         this.jokes.push(new Joke(j.setup,j.line,j.category,j.id,j.hide));
+          console.log(j);
+      }
       this.service.setJokes(this.jokes);
     },
     (err)=>{

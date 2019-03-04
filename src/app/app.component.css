@@ -1,0 +1,12 @@
+a{
+    background-color: red;
+    color: white;
+    padding: 1em 1.5em;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-left: 5px;
+    }
+    .active{
+    background-color: black;
+    }
+    

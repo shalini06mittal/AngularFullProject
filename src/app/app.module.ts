@@ -7,6 +7,15 @@ import { JokeComponent } from './joke/joke.component';
 import { JokelistComponent } from './jokelist/jokelist.component';
 import { JokeformComponent } from './jokeform/jokeform.component';
 import {HttpClientModule} from '@angular/common/http';
+import {RouterModule,Routes} from '@angular/router';
+const routes:Routes=[
+ {
+   path:'create',component:JokeformComponent
+ },
+ {
+   path:'jokes',component:JokelistComponent
+ }
+]
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +25,8 @@ import {HttpClientModule} from '@angular/common/http';
     JokeformComponent
   ],
   imports: [
-    BrowserModule,FormsModule,HttpClientModule
+    BrowserModule,FormsModule,HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

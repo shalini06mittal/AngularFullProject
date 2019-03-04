@@ -13,10 +13,11 @@ export class JokeComponent implements OnInit {
      // this.subscription = this.messageService.getMessage().subscribe(message => { this.message = message; });
   }
   ngOnInit() {   
+    console.log(this.joke);
   }
 toggle()
 {
-  console.log("toggle")
+  console.log("toggle");
   this.joke.toggle();
 } 
 
