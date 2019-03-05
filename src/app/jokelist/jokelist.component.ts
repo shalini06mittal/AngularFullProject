@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Joke } from '../model/joke';
 import { JokeService } from '../service/joke.service';
 import { JokeHttpService } from '../service/joke.http.service';
-
+import {ActivatedRoute,Router} from '@angular/router';
 @Component({
   selector: 'app-jokelist',
   templateUrl: './jokelist.component.html',
@@ -12,7 +12,7 @@ export class JokelistComponent implements OnInit {
   jokes:Joke[];
   joke:Joke;
   editing:boolean=false;
-  constructor(private service:JokeHttpService) {
+  constructor(private route:ActivatedRoute, private router:Router,private service:JokeHttpService) {
     this.jokes=[]; 
    }
   ngOnInit() {
@@ -20,12 +20,13 @@ export class JokelistComponent implements OnInit {
   }
   getJokes()
   {
-    this.service.getJokes().subscribe((resp:Joke[])=>{
-      
+    this.service.getJokes().subscribe((resp:Joke[])=>{    
+      console.log("**********get jokes *************");
+      console.log(resp);
+      //this.jokes = resp;
       for(let j of resp){
-        console.log(j.setup);
-         this.jokes.push(new Joke(j.setup,j.line,j.category,j.id,j.hide));
-          console.log(j);
+        let joke:Joke = new Joke(j.setup,j.line,j.category,j.id,j.hide);
+         this.jokes.push(joke);
       }
       this.service.setJokes(this.jokes);
     },
@@ -64,6 +65,8 @@ export class JokelistComponent implements OnInit {
       console.log(err);
     });;
   }
-
+  onselect(j){
+    this.router.navigate(['/jokes',j.id]);
+  }
 
 }

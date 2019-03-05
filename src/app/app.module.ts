@@ -8,12 +8,16 @@ import { JokelistComponent } from './jokelist/jokelist.component';
 import { JokeformComponent } from './jokeform/jokeform.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule,Routes} from '@angular/router';
+import { JokedetailComponent } from './jokedetail/jokedetail.component';
 const routes:Routes=[
  {
    path:'create',component:JokeformComponent
  },
  {
    path:'jokes',component:JokelistComponent
+ },
+ {
+   path:'jokes/:id',component:JokedetailComponent
  }
 ]
 @NgModule({
@@ -22,7 +26,8 @@ const routes:Routes=[
     HeaderComponent,
     JokeComponent,
     JokelistComponent,
-    JokeformComponent
+    JokeformComponent,
+    JokedetailComponent
   ],
   imports: [
     BrowserModule,FormsModule,HttpClientModule,
