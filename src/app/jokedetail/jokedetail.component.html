@@ -24,14 +24,14 @@
   <p>{{joke?.line}}</p>
   </div>
   </div>
-<div class="row">
+<!-- <div class="row">
 <div class="col-md-2">
 <p>Joke Category : </p>
 </div>
 <div class="col-md-10">
 <p>{{joke?.category}}</p>
 </div>
-</div>
+</div> -->
 
   <div class="links">
     <a (click)="prev()">Previous</a>
@@ -40,10 +40,11 @@
     <div class="blinks">
     <a (click)="back()">Back</a>
     </div>
-    <!-- <p class="blinks">
+   
+    <p class="blinks">
     <a (click)="overview()">Show Overview</a>
-    <a (click)=”category()">Show Category</a>
+    <a (click)="category()">Show Category</a>
     </p>
-    <router-outlet></router-outlet> -->
+    <router-outlet></router-outlet>
     </div>
         

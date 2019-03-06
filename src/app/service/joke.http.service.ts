@@ -15,7 +15,7 @@ export class JokeHttpService {
   addJoke(joke:Joke)
   {
      const  headers = new HttpHeaders().set('ContentType','application/json');
-    this.httpService.post(this.url,(joke),{headers,responseType:'text'}).
+    this.httpService.post(this.url,joke,{headers,responseType:'text'}).
     subscribe((data)=>{
         console.log("data returned");
         console.log(data);
@@ -41,10 +41,23 @@ export class JokeHttpService {
   {
      return this.httpService.get<Joke[]>(this.url);
   }
-  getJoke(id:number):Observable<Joke>{
+  // getJoke(id:number):Observable<Joke>{
     
-    return this.httpService.get<Joke>(this.url+'/'+id);
-  }
+  //   return this.httpService.get<Joke>(this.url+'/'+id);
+  // }
+  getJoke(id:number):Joke{
+    console.log("is passed "+id);
+    console.log(this.jokes);
+    for(var j=0;j<this.jokes.length;j++)
+    {
+    if(this.jokes[j].id===id)
+    {
+      return this.jokes[j];
+    }
+    }
+    return null;
+    }
+    
   deleteJoke(id)
   {
       return this.httpService.delete(this.url+'/'+id,{responseType:'text'});

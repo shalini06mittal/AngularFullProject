@@ -19,30 +19,42 @@ export class JokedetailComponent implements OnInit {
     this.route.paramMap.subscribe((data:ParamMap)=>{
       console.log(data.get('id'));
       this.id = parseInt(data.get('id'));
-      this.service.getJoke(this.id).subscribe((resp:Joke)=>{
-        console.log(resp);
-        this.joke = new Joke(resp.setup,resp.line,resp.category,resp.id);
-      },
-      (err)=>{
-        console.log("error occured");
-        console.log(err);
-      })
-    });
+      this.joke = this.service.getJoke(this.id);
+    //   this.service.getJoke(this.id).subscribe((resp:Joke)=>{
+    //     console.log(resp);
+    //     this.joke = new Joke(resp.setup,resp.line,resp.category,resp.id);
+    //   },
+    //   (err)=>{
+    //     console.log("error occured");
+    //     console.log(err);
+    //   })
+     });
     
     
   }
-  prev()
+prev()
 {
-let previd = this.joke.id-1;
-if(previd==0) previd=1;
-this.router.navigate(['/jokes',previd]);
+  let previd = this.joke.id-1;
+  if(previd==0) previd=1;
+  this.router.navigate(['/jokes',previd]);
 }
 next()
 {
-let nextid = this.joke.id+1;
-if(nextid == this.service.getAllJokes().length+1) 
-  nextid=this.service.getAllJokes().length;
-this.router.navigate(['/jokes',nextid]);}
-
-
+    let nextid = this.joke.id+1;
+    if(nextid == this.service.getAllJokes().length+1) 
+      nextid=this.service.getAllJokes().length;
+    this.router.navigate(['/jokes',nextid]);
+  }
+  back()
+  {
+    this.router.navigate(['/jokes']);
+  }
+  overview()
+  {
+    this.router.navigate(['overview'],{relativeTo:this.route});
+  }
+  category()
+  {
+    this.router.navigate(['category'],{relativeTo:this.route});
+  }
 }

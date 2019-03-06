@@ -9,7 +9,13 @@ import { JokeformComponent } from './jokeform/jokeform.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule,Routes} from '@angular/router';
 import { JokedetailComponent } from './jokedetail/jokedetail.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { OverviewComponent } from './overview/overview.component';
+import { CategoryComponent } from './category/category.component';
 const routes:Routes=[
+  {
+      path:'', redirectTo:'jokes',pathMatch:'full'
+  },
  {
    path:'create',component:JokeformComponent
  },
@@ -17,7 +23,17 @@ const routes:Routes=[
    path:'jokes',component:JokelistComponent
  },
  {
-   path:'jokes/:id',component:JokedetailComponent
+   path:'jokes/:id',component:JokedetailComponent,
+   children:[
+     {
+       path:'overview',component:OverviewComponent
+     },
+     {
+       path:'category',component:CategoryComponent
+     }
+   ]
+ },{
+   path:'**' , component:PagenotfoundComponent
  }
 ]
 @NgModule({
@@ -27,7 +43,7 @@ const routes:Routes=[
     JokeComponent,
     JokelistComponent,
     JokeformComponent,
-    JokedetailComponent
+    JokedetailComponent,PagenotfoundComponent, OverviewComponent, CategoryComponent
   ],
   imports: [
     BrowserModule,FormsModule,HttpClientModule,
