@@ -12,11 +12,15 @@ export class JokelistComponent implements OnInit {
   jokes:Joke[];
   joke:Joke;
   editing:boolean=false;
+  selid:number;
   constructor(private route:ActivatedRoute, private router:Router,private service:JokeHttpService) {
     this.jokes=[]; 
    }
   ngOnInit() {
     this.getJokes();
+    //for retrieving query parameters
+    this.route.queryParams.subscribe(params=>this.selid=parseInt(params['id']));
+    //this.route.paramMap.subscribe(params=>this.selid=parseInt(params.get('id')))
   }
   getJokes()
   {
@@ -66,7 +70,11 @@ export class JokelistComponent implements OnInit {
     });;
   }
   onselect(j){
-    this.router.navigate(['/jokes',j.id]);
+    this.router.navigate([j.id],{relativeTo:this.route,queryParams:{}});
   }
 
+  isselected(j)
+  {
+    return j.id===this.selid;
+  }
 }

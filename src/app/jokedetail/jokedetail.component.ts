@@ -19,15 +19,15 @@ export class JokedetailComponent implements OnInit {
     this.route.paramMap.subscribe((data:ParamMap)=>{
       console.log(data.get('id'));
       this.id = parseInt(data.get('id'));
-      this.joke = this.service.getJoke(this.id);
-    //   this.service.getJoke(this.id).subscribe((resp:Joke)=>{
-    //     console.log(resp);
-    //     this.joke = new Joke(resp.setup,resp.line,resp.category,resp.id);
-    //   },
-    //   (err)=>{
-    //     console.log("error occured");
-    //     console.log(err);
-    //   })
+      // this.joke = this.service.getJoke(this.id);
+      this.service.getJoke(this.id).subscribe((resp:Joke)=>{
+        console.log(resp);
+        this.joke = new Joke(resp.setup,resp.line,resp.category,resp.id);
+      },
+      (err)=>{
+        console.log("error occured");
+        console.log(err);
+      })
      });
     
     
@@ -36,18 +36,21 @@ prev()
 {
   let previd = this.joke.id-1;
   if(previd==0) previd=1;
-  this.router.navigate(['/jokes',previd]);
+  this.router.navigate(['../',previd],{relativeTo:this.route});
 }
 next()
 {
     let nextid = this.joke.id+1;
     if(nextid == this.service.getAllJokes().length+1) 
       nextid=this.service.getAllJokes().length;
-    this.router.navigate(['/jokes',nextid]);
+    this.router.navigate(['../',nextid],{relativeTo:this.route});
   }
   back()
   {
-    this.router.navigate(['/jokes']);
+    //for matrix params
+    //this.router.navigate(['../',{id:this.joke.id}],{relativeTo:this.route});
+    //for query params
+    this.router.navigate(['../'],{relativeTo:this.route,queryParams:{id:this.joke.id}});
   }
   overview()
   {

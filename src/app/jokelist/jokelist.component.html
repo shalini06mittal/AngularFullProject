@@ -8,7 +8,7 @@
               <div style='margin-bottom: 10px;'></div>
               <button (click)="edit(j)">Edit</button>
               <div style='margin-bottom: 10px;'></div>
-              <button (click)="onselect(j)">Details</button>
+              <button (click)="onselect(j)" [class.selected]="isselected(j)">Details</button>
           </app-joke>    
       </div>  
     </div>

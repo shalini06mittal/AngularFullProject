@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, FormGroup} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { JokeComponent } from './joke/joke.component';
@@ -12,18 +12,21 @@ import { JokedetailComponent } from './jokedetail/jokedetail.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { OverviewComponent } from './overview/overview.component';
 import { CategoryComponent } from './category/category.component';
+import { UserloginGuard } from './guards/userlogin.guard';
+import { FormGuard } from './guards/formdeactivate.guard';
 const routes:Routes=[
   {
-      path:'', redirectTo:'jokes',pathMatch:'full'
+      path:'', redirectTo:'jokeslist',pathMatch:'full'
   },
  {
-   path:'create',component:JokeformComponent
+   path:'create',component:JokeformComponent,canActivate:[UserloginGuard],
+   canDeactivate:[FormGuard]
  },
  {
-   path:'jokes',component:JokelistComponent
+   path:'jokeslist',component:JokelistComponent
  },
  {
-   path:'jokes/:id',component:JokedetailComponent,
+   path:'jokeslist/:id',component:JokedetailComponent,
    children:[
      {
        path:'overview',component:OverviewComponent

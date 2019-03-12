@@ -41,22 +41,22 @@ export class JokeHttpService {
   {
      return this.httpService.get<Joke[]>(this.url);
   }
-  // getJoke(id:number):Observable<Joke>{
+  getJoke(id:number):Observable<Joke>{
     
-  //   return this.httpService.get<Joke>(this.url+'/'+id);
-  // }
-  getJoke(id:number):Joke{
-    console.log("is passed "+id);
-    console.log(this.jokes);
-    for(var j=0;j<this.jokes.length;j++)
-    {
-    if(this.jokes[j].id===id)
-    {
-      return this.jokes[j];
-    }
-    }
-    return null;
-    }
+    return this.httpService.get<Joke>(this.url+'/'+id);
+  }
+  // getJoke(id:number):Joke{
+  //   console.log("is passed "+id);
+  //   console.log(this.jokes);
+  //   for(var j=0;j<this.jokes.length;j++)
+  //   {
+  //   if(this.jokes[j].id===id)
+  //   {
+  //     return this.jokes[j];
+  //   }
+  //   }
+  //   return null;
+  //   }
     
   deleteJoke(id)
   {
@@ -65,5 +65,8 @@ export class JokeHttpService {
   editJoke(joke)
   {
     return this.httpService.put(this.url,joke,{responseType:'text'});
+  }
+  getCategory(id:number){
+    //to do seacrh for joke with id and return the category
   }
 }

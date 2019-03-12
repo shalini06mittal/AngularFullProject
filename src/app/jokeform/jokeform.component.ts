@@ -14,7 +14,7 @@ export class JokeformComponent {
   joke:Joke;
   categories:string[];
   hasError:boolean=true;
-  submitted = false;
+  submitted:boolean = false;
   // constructor(private service:JokeService){
   //   this.categories = categories;
   //   this.joke = new Joke('','','');
@@ -34,11 +34,15 @@ export class JokeformComponent {
   }
   onsubmit(jokeform)
   {
-    //this.submitted = true;
+    this.submitted = true;
     console.log(jokeform);
     let jokeobj = jokeform.value;
     this.service.addJoke(new Joke(jokeobj.setup,jokeobj.line,
       jokeobj.category));
     jokeform.reset();
   }
+  canDeactivate() {
+    return this.submitted;
+  }
+  
 }
