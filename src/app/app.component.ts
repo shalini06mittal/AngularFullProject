@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { JokeHttpService } from './service/joke.http.service';
 import { Joke } from './model/joke';
+import { AuthService } from './service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,8 @@ import { Joke } from './model/joke';
 })
 export class AppComponent {
   joke:Joke;
+  constructor(private service:AuthService){}
+  logout(){
+    this.service.logout();
+  }
 }

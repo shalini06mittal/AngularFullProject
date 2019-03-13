@@ -14,9 +14,14 @@ import { OverviewComponent } from './overview/overview.component';
 import { CategoryComponent } from './category/category.component';
 import { UserloginGuard } from './guards/userlogin.guard';
 import { FormGuard } from './guards/formdeactivate.guard';
+import { LoginComponent } from './login/login.component';
+import { RoleGuard } from './guards/role.guard';
 const routes:Routes=[
   {
       path:'', redirectTo:'jokeslist',pathMatch:'full'
+  },
+  {
+    path:'login',component:LoginComponent
   },
  {
    path:'create',component:JokeformComponent,canActivate:[UserloginGuard],
@@ -26,8 +31,9 @@ const routes:Routes=[
    path:'jokeslist',component:JokelistComponent
  },
  {
-   path:'jokeslist/:id',component:JokedetailComponent,
-   children:[
+   path:'jokeslist/:id',component:JokedetailComponent,canActivate:[RoleGuard],
+   data:{'role':'Admin'},
+      children:[
      {
        path:'overview',component:OverviewComponent
      },
@@ -46,7 +52,7 @@ const routes:Routes=[
     JokeComponent,
     JokelistComponent,
     JokeformComponent,
-    JokedetailComponent,PagenotfoundComponent, OverviewComponent, CategoryComponent
+    JokedetailComponent,PagenotfoundComponent, OverviewComponent, CategoryComponent, LoginComponent
   ],
   imports: [
     BrowserModule,FormsModule,HttpClientModule,

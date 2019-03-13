@@ -4,8 +4,11 @@
 <div class="container"> 
     <a routerLink="/jokeslist" routerLinkActive="active">List</a>
     <a routerLink="/create" routerLinkActive="active">Create Joke</a>
-    </div>
-    <router-outlet></router-outlet>
+</div>
+<div style="text-align:right; margin-right:40px;">
+    <button (click)="logout()"> Logout</button>
+ </div>
+<router-outlet></router-outlet>
 <!-- <app-jokeform></app-jokeform>
 <div class="list">
 <app-jokelist></app-jokelist> 
